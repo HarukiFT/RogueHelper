@@ -1,7 +1,9 @@
 const cv = require('opencv4nodejs')
 const screenshot = require('screenshot-desktop')
 
-const manaCountour = (img) => {
+const manaCountour = (buffer) => {
+    const img = cv.imdecode(buffer)
+
     const optimalImage = img.cvtColor(cv.COLOR_HSV2BGR).gaussianBlur(new cv.Size(5, 5), 1)
     const lowerBlue = new cv.Vec(100, 80, 0);
     const upperBlue = new cv.Vec(150, 150, 100);
@@ -32,26 +34,8 @@ const manaCountour = (img) => {
     })[0]
 }
 
-setInterval(() => {
-    screenshot({ format: 'png' }).then(image => {
-        const img = cv.imdecode(image);
-    
-        const manaBar = manaCountour(img)
-        if (!manaBar) return
-        const rect = manaBar.boundingRect()
-        img.drawRectangle(
-            new cv.Point2(rect.x, rect.y),
-            new cv.Point2(rect.x + rect.width, rect.y + rect.height),
-            new cv.Vec3(255, 255, 0),
-            2,
-            cv.LINE_8
-        )
-    
-        cv.imshow('Test', img)
-        cv.waitKey(10)
-    }).catch(err => {
-        console.log(err)
-    })
-}, 10);
+module.exports = {
+    manaCountour
+}
 
 
