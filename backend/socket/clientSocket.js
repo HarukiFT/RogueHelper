@@ -1,8 +1,10 @@
-const { manaCountour } = require("../ml/manaBar");
+const { handleScreenshot } = require("../controllers/screenshotController");
 
 module.exports = (socket) => {
     socket.on('screenshot', (buffer) => {
-        console.log(buffer)
+        const payload = handleScreenshot(buffer)
+
+        socket.emit('payload', payload)
     });
 
     socket.on('disconnect', () => {
