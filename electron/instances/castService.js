@@ -19,9 +19,7 @@ class ClientCast {
     }
 
     #handlePayload(payload) {
-        if (payload.manaRect) {
-            this.#eventEmitter.emit('manaRect', payload.manaRect)
-        }
+       this.#eventEmitter.emit('manaRect', payload.manaRect)
     }
     
     on(action, callback) {
