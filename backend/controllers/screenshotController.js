@@ -1,5 +1,5 @@
-const { getHpBounding } = require("../services/hpBounding")
 const { getManaBounding } = require("../services/manaBounding")
+const { getHpBounding } = require("../services/hpBounding")
 
 const doCollibrate = (buffer) => {
     const manaRect = getManaBounding(buffer)

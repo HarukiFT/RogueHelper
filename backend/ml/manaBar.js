@@ -1,4 +1,6 @@
-const cv = require('opencv4nodejs')
+const opencv = require("../config/openCv")
+
+const cv = opencv
 
 const manaCountour = (buffer) => {
     const img = cv.imdecode(buffer)

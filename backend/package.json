@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install_4.5.5_cuda": "build-opencv --version 4.5.5 --flags=\"-DWITH_CUDA=ON -DWITH_CUDNN=ON -DOPENCV_DNN_CUDA=ON -DCUDA_FAST_MATH=ON\" build",
+    "do-install": "build-opencv build"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "opencv-build": "^0.1.9",
     "opencv4nodejs": "^5.6.0",
     "papaparse": "^5.4.1",
     "screenshot-desktop": "^1.15.0",
