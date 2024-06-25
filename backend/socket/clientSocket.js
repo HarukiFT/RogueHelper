@@ -1,10 +1,10 @@
-const { handleScreenshot } = require("../controllers/screenshotController");
+const { doCollibrate } = require("../controllers/screenshotController");
 
 module.exports = (socket) => {
-    socket.on('screenshot', (buffer) => {
-        const payload = handleScreenshot(buffer)
+    socket.on('collibrate', (buffer) => {
+        const payload = doCollibrate(buffer)
 
-        socket.emit('payload', payload)
+        socket.emit('collibrate', payload)
     });
 
     socket.on('disconnect', () => {

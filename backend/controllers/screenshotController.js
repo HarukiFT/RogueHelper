@@ -1,13 +1,16 @@
+const { getHpBounding } = require("../services/hpBounding")
 const { getManaBounding } = require("../services/manaBounding")
 
-const handleScreenshot = (buffer) => {
+const doCollibrate = (buffer) => {
     const manaRect = getManaBounding(buffer)
+    const hpRect = getHpBounding(buffer)
 
     return {
-        manaRect
-    }    
+        manaRect,
+        hpRect
+    }
 }
 
 module.exports = {
-    handleScreenshot
+    doCollibrate
 }

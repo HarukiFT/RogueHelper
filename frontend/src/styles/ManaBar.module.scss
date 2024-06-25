@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.holder {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 25% 20%;
+}
+
+.inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    font-size: 10px;
+    left: 0;
+    background-color: rgba(201, 151, 100);
+
+    @media (max-height: 300px) {
+        font-size: 8px;
+    }
+
+    > span {
+        width: 100%;
+        bottom: calc(0em + .5em);
+        font-size: 1em;
+        position: absolute;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+    }
+}

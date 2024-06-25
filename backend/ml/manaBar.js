@@ -1,22 +1,21 @@
 const cv = require('opencv4nodejs')
-const screenshot = require('screenshot-desktop')
 
 const manaCountour = (buffer) => {
     const img = cv.imdecode(buffer)
 
-    const optimalImage = img.cvtColor(cv.COLOR_HSV2BGR).gaussianBlur(new cv.Size(1, 1), 1)
-    const lowerBlue = new cv.Vec(160, 50, 50);
-    const upperBlue = new cv.Vec(250, 255, 255);
+    const optimalImage = img.cvtColor(cv.COLOR_BGR2RGB)
+    const lowerBlue = new cv.Vec(201, 151, 100)
+    const upperBlue = new cv.Vec(230, 171, 113)
     const mask = optimalImage.inRange(lowerBlue, upperBlue);
 
-    const kernel = new cv.Mat(3, 3, cv.CV_8U, 1);
+    const kernel = new cv.Mat(3, 3, cv.CV_8U, 1)
 
     const cannyCorners = mask.canny(255, 255)
-    const dilated = cannyCorners.dilate(kernel);
-    const closed = dilated.morphologyEx(kernel, cv.MORPH_CLOSE);
+    const dilated = cannyCorners.dilate(kernel)
+    const closed = dilated.morphologyEx(kernel, cv.MORPH_CLOSE)
 
-    const contours = closed.findContours(cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-    
+    const contours = closed.findContours(cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
     return contours.filter(contour => {
         const rect = contour.boundingRect()
         const aspectRatio = rect.width / rect.height

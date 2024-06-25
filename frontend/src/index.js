@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import ManaBar from './components/ManaBar.js';
+import HpBar from './components/HpBar.js';
 
+const router = createBrowserRouter(createRoutesFromElements((
+  <>
+    <Route path='/manabar' element={<ManaBar/>}/>
+    <Route path='/hpbar' element={<HpBar/>}/>
+  </>
+)))
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <RouterProvider router={router}>
+
+    </RouterProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

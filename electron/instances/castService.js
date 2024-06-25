@@ -10,36 +10,33 @@ class ClientCast {
         this.connection = io(connectionString)
         
         this.connection.on('connect', () => {
-            this.loop()
+            // this.loop()
         })
         
-        this.connection.on('payload', (data) => {
-            this.#handlePayload(data)
+        this.connection.on('collibrate', (data) => {
+            this.#handleCollibrate(data)
         })
     }
 
-    #handlePayload(payload) {
+    #handleCollibrate(payload) {
        this.#eventEmitter.emit('manaRect', payload.manaRect)
+       this.#eventEmitter.emit('hpRect', payload.hpRect)
     }
     
     on(action, callback) {
         this.#eventEmitter.on(action, callback)
     }
 
-    shot() {
+    collibrate() {
         this.#eventEmitter.emit('hide')
-        screenshotDesktop({format: "jpeg"}).then((buffer) => {
-            this.connection.emit('screenshot', buffer)
+        screenshotDesktop({format: "png"}).then((buffer) => {
+            this.connection.emit('collibrate', buffer)
+            console.log('emitted')
+
+            this.#eventEmitter.emit('show')
         }).catch(err => {
             console.log(err)
         })
-        this.#eventEmitter.emit('show')
-    }
-
-    loop() {
-        setInterval(() => {
-            this.shot()
-        }, (100));
     }
 }
 
