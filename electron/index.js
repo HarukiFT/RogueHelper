@@ -1,18 +1,15 @@
-const { app, BrowserWindow } = require('electron')
-const { io } = require('socket.io-client')
-const { ClientCast } = require('./services/castService')
+const { app } = require('electron')
+const { ClientCast } = require('./instances/castService')
+const manaWindow = require('./windows/manaWindow')
 
 let castObject;
 
-const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600
-  })
+const initCast = () => {
+  castObject = new ClientCast('http://localhost:4000')
 }
 
 app.whenReady().then(() => {
-  castObject = new ClientCast('http://localhost:4000')
+  initCast()
 
-  createWindow()
+  manaWindow(castObject)  
 })
