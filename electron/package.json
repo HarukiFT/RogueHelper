@@ -4,17 +4,47 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder --dir"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^31.0.2"
+    "electron": "^31.0.2",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.roguehelper",
+    "productName": "RogueHelper",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/screenshot-desktop/lib/win32/screenCapture_1.3.2.bat",
+        "to": "resources/win32/screenCapture_1.3.2.bat"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   },
   "dependencies": {
+    "desktop-screenshot": "^0.1.1",
     "dotenv": "^16.4.5",
     "electron-is-dev": "^3.0.1",
+    "electron-screenshot-service": "^4.0.3",
+    "jimp": "^0.22.12",
     "screenshot-desktop": "^1.15.0",
     "socket.io-client": "^4.7.5"
   }

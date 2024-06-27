@@ -1,7 +1,8 @@
-const { app, Menu, Tray } = require('electron')
+const { app, Menu, Tray, BrowserWindow } = require('electron')
 const { ClientCast } = require('./instances/castService')
 const manaWindow = require('./windows/manaWindow')
 const endpoints = require('./config/endpoints')
+const path = require('path')
 
 let castObject;
 
@@ -19,12 +20,10 @@ const contextMenu = Menu.buildFromTemplate([
   { label: 'Quit', click: () => app.quit() }
 ]);
 
-
-
 app.whenReady().then(() => {
   initCast()
 
-  const tray = new Tray('assets/tray-icon.png')
+  const tray = new Tray(path.join(__dirname, 'resources', 'tray-icon.png'))
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
 

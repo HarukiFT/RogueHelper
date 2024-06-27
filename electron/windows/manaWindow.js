@@ -9,11 +9,14 @@ const createWindow = (cast) => {
         height: 0,
         frame: false,
         alwaysOnTop: true,
-        transparent: true
+        transparent: true,
+        focusable: false,
+        resizable: false,
     })
-    
+
     window.loadURL(`${endpoints.reactEndpoint}/manabar`)
     cast.on('manaRect', (rect) => {
+        if (!rect) { return }
         const windowBounds = window.getBounds()
         const magnitude = Math.sqrt(Math.pow((rect.left - windowBounds.x), 2) + Math.pow((rect.top - windowBounds.y), 2))
         if (magnitude < 20) { return }
